@@ -31,17 +31,18 @@ class Driver < ApplicationRecord
     return get_earning_after_fee(cost).round(2)
   end
 
-  def is_new_driver?
-    return get_completed_trips.empty?
+  def is_available?
+    return has_only_completed_trips?
   end
 
   private
 
-  def find_completed_trips
-    # return trips.where(is_complete: true)
+  def has_only_completed_trips?
+    return trips.any? { |trip| !trip.is_complete? }
+  end
 
+  def find_completed_trips
     return self.trips.select { |trip| trip if trip.is_complete? }
-    # return self.trips.where.not(rating: nil)
   end
 
   def calculate_average_rating

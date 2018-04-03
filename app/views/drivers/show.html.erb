@@ -5,4 +5,12 @@
 	<li><%= @driver.vin %></li>
 	<li><%= @driver.car_make %></li>
 	<li><%= @driver.car_model %></li>
+	<li>Average rating: <%= @driver.get_average_rating %></li>
+</ul>
+
+<ul>
+	<% @driver.get_completed_trips.each do |trip| %>
+		<li><%= trip.date %>, <%= trip.passenger.name %>,
+			$<%= '%.2f' % (trip.cost / 100.0) %>, <%= trip.rating %></li>
+	<% end %>
 </ul>

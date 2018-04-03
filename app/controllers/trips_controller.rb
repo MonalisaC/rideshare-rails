@@ -58,5 +58,6 @@ end
 private
 
 def trip_params
-  params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id)
+  params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id,
+    :is_available)
 end

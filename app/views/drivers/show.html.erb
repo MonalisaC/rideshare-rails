@@ -1,19 +1,35 @@
 <h1>Driver Info</h1>
 
-<ul>
-	<li><%= @driver.name %></li>
-	<li><%= @driver.vin %></li>
-	<li><%= @driver.car_make %></li>
-	<li><%= @driver.car_model %></li>
-	<li>Average rating: <%= @driver.get_average_rating %></li>
-</ul>
+<h2><%= @driver.name %></h2>
 
 <ul>
-	<% @driver.get_completed_trips.each do |trip| %>
-		<li>
-			<%= link_to trip.id, trip_path(trip.id) %>: <%= trip.date %>,
-			<%= trip.passenger.name %>, $<%= '%.2f' % (trip.cost / 100.0) %>,
-			<%= trip.rating %>
-		</li>
-	<% end %>
+	<li>VIN: <%= @driver.vin %></li>
+	<li>Car Make: <%= @driver.car_make %></li>
+	<li>Car Model: <%= @driver.car_model %></li>
+	<li>Average rating: <%= @driver.get_average_rating %></li>
+	<li>Total earnings: $<%= '%.2f' % @driver.get_total_earnings %> </li>
 </ul>
+
+
+<ul>
+	<li><%= link_to "Edit", edit_driver_path %></li>
+	<li><%= link_to "Delete", driver_path(@driver.id), method: :delete, data: { confirm:
+		'Are you sure?' } %></li>
+</ul>
+
+<section class="trips-for-driver">
+<!-- <ul> -->
+	<% @driver.get_completed_trips.each do |trip| %>
+		<!-- <li> -->
+			<ul>
+				<li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
+				<li>Date: <%= trip.date %></li>
+				<li>Passenger: <%= trip.passenger.name %></li>
+				<li>Cost (earned): $<%= '%.2f' % (trip.cost / 100.0) %>
+		 			($<%= @driver.get_earning_from_cost(trip.cost) %>)</li>
+			 	<li>Rating: <%= trip.rating %></li>
+			</ul>
+		<!-- </li> -->
+	<% end %>
+<!-- </ul> -->
+</section>

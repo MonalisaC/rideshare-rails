@@ -1,26 +1,59 @@
 class TripsController < ApplicationController
   def index
-    @trips = Trip.all.order(params[:date])
+    @trips = Trip.all.order(id: :asc)
   end
 
   def show
+    @trip = Trip.find(params[:id])
   end
 
   def new
+    @trip = Trip.new
   end
 
   def create
+    @trip = Trip.new
+    @trip.driver = Driver.all.sample
+    @trip.passenger = Passenger.find_by(id: params[:psngr_id])
+    @trip.rating = nil
+    @trip.date = Date.today
+    @trip.cost = rand(1000..3000)
+
+    if @trip.save
+      redirect_to @trip
+    else
+      render :new
+    end
+
   end
 
   def edit
+    @trip = Trip.find_by(id: params[:id])
+
   end
 
   def update
+    @trip = Trip.find_by(id: params[:id])
+    if !@trip.nil?
+      if @trip.update(trip_params)
+        redirect_to trip_path(@trip.id)
+      else
+        render :edit
+      end
+    else
+      redirect_to trips_path
+    end
   end
 
   def destroy
+    if  @trip = Trip.find(params[:id])
+      @trip.destroy
+    end
+    redirect_to trips_path
   end
+
 end
+
 private
 
 def trip_params

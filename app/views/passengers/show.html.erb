@@ -16,7 +16,6 @@
     </section>
     Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %>
 
-  </p>
   <ul>
     <li>
       <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>

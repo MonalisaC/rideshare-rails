@@ -1,5 +1,11 @@
 <h2> Passenger name: <%= @passenger.name %> <h2>
   <h3>   Phone number: <%= @passenger.phone_num %> <h3>
+    <p>
+      Trips:
+    <%= @passenger.trips.each do |trip| %>
+    <%= puts trip %>
+    <% end %>
+    </p>
     <ul>
       <li>
         <%= link_to "Edit", edit_passenger_path %>

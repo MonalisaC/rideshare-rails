@@ -26,7 +26,7 @@ class Driver < ApplicationRecord
     return '%.2f' % calculate_total_earning
   end
 
-  def get_earning_from_cost(cost)
+  def get_earned_amount(cost)
     raise ArgumentError.new("Invalid cost") if !cost.is_a?(Float)
     return get_earning_after_fee(cost).round(2)
   end
@@ -47,13 +47,12 @@ class Driver < ApplicationRecord
 
   def calculate_average_rating
     trips = self.get_completed_trips
-    # return "--" if trips.empty?
     return trips.inject(0.0) { |sum, trip| sum + trip.rating } / trips.size
   end
 
   def calculate_total_earning
     trips = self.get_completed_trips
-    return trips.inject(0.0) { |sum, trip| sum + get_earning_from_cost(trip.cost_usd) }
+    return trips.inject(0.0) { |sum, trip| sum + get_earned_amount(trip.cost_usd) }
   end
 
   def get_earning_after_fee(cost)

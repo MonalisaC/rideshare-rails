@@ -1,2 +1,10 @@
-<h1>Passengers#show</h1>
-<p>Find me in app/views/passengers/show.html.erb</p>
+<h2> Passenger name: <%= @passenger.name %> <h2>
+  <h3>   Phone number: <%= @passenger.phone_num %> <h3>
+    <ul>
+      <li>
+        <%= link_to "Edit", edit_passenger_path %>
+      </li>
+      <li>
+        <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    </ul>

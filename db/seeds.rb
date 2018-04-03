@@ -11,7 +11,6 @@ cars = [
   {make: "Toyota", models: ["RAV4", "Prius", "Camry"]}
 ]
 
-
 driver_failures = []
 CSV.foreach(DRIVER_FILE, :headers => true) do |row|
   driver = Driver.new

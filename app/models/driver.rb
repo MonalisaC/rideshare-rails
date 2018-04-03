@@ -5,7 +5,10 @@
 class Driver < ApplicationRecord
   has_many :trips
 
-  TRIP_FEE = 165
+  validates :name, presence: true
+  validates :vin, presence: true
+
+  TRIP_FEE = 1.65
 
   # Returns all the completed trips for the driver
   def get_completed_trips
@@ -14,7 +17,7 @@ class Driver < ApplicationRecord
 
   #
   def get_average_rating
-    return calculate_average_rating
+    return calculate_average_rating.round(2)
   end
 
   # Returns
@@ -23,8 +26,8 @@ class Driver < ApplicationRecord
   end
 
   def get_earning_from_cost(cost)
-    raise ArgumentError.new("Invalid cost") if !cost.is_a?(Integer)
-    return '%.2f' % (get_earning_after_fee(cost))
+    raise ArgumentError.new("Invalid cost") if !cost.is_a?(Float)
+    return get_earning_after_fee(cost).round(2)
   end
 
   private
@@ -40,11 +43,11 @@ class Driver < ApplicationRecord
 
   def calculate_total_earning
     trips = self.get_completed_trips
-    return trips.inject(0.0) { |sum, trip| sum + get_earning_after_fee(trip.cost) }
+    return trips.inject(0.0) { |sum, trip| sum + get_earning_from_cost(trip.cost_usd) }
   end
 
   def get_earning_after_fee(cost)
-    return cost < TRIP_FEE ? 0.0 : (cost - TRIP_FEE) * 0.8 / 100
+    return cost < TRIP_FEE ? 0.0 : (cost - TRIP_FEE) * 0.8
   end
 
 end

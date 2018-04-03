@@ -3,12 +3,24 @@ require 'csv'
 DRIVER_FILE = Rails.root.join('db', 'seed_data', 'drivers.csv')
 puts "Loading raw driver data from #{DRIVER_FILE}"
 
+cars = [
+  {make: "Ford", models: ["Escape", "Focus", "Fiesta"]},
+  {make: "Honda", models: ["Accord", "Civic", "CR-V"]},
+  {make: "Hyundai", models: ["Elantra", "Santa Fe", "Sonata"]},
+  {make: "Nissan", models: ["Altma", "Leaf", "PathFinder"]},
+  {make: "Toyota", models: ["RAV4", "Prius", "Camry"]}
+]
+
+
 driver_failures = []
 CSV.foreach(DRIVER_FILE, :headers => true) do |row|
   driver = Driver.new
   driver.id = row['id']
   driver.name = row['name']
   driver.vin = row['vin']
+  car = cars.sample
+  driver.car_make = car[:make]
+  driver.car_model = car[:models].sample
   successful = driver.save
   if !successful
     driver_failures << driver
@@ -20,7 +32,6 @@ end
 
 puts "Added #{Driver.count} driver records"
 puts "#{driver_failures.length} drivers failed to save"
-
 
 
 PASSENGER_FILE = Rails.root.join('db', 'seed_data', 'passengers.csv')
@@ -43,7 +54,6 @@ end
 
 puts "Added #{Passenger.count} passenger records"
 puts "#{passenger_failures.length} passengers failed to save"
-
 
 
 TRIP_FILE = Rails.root.join('db', 'seed_data', 'trips.csv')

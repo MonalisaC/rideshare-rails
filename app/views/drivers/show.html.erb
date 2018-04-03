@@ -25,8 +25,7 @@
 				<li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
 				<li>Date: <%= trip.date %></li>
 				<li>Passenger: <%= trip.passenger.name %></li>
-				<li>Cost (earned): $<%= '%.2f' % (trip.cost / 100.0) %>
-		 			($<%= @driver.get_earning_from_cost(trip.cost) %>)</li>
+				<li>Earned: $<%= @driver.get_earning_from_cost(trip.cost_usd) %></li>
 			 	<li>Rating: <%= trip.rating %></li>
 			</ul>
 		<!-- </li> -->

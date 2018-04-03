@@ -10,7 +10,10 @@
 
 <ul>
 	<% @driver.get_completed_trips.each do |trip| %>
-		<li><%= trip.date %>, <%= trip.passenger.name %>,
-			$<%= '%.2f' % (trip.cost / 100.0) %>, <%= trip.rating %></li>
+		<li>
+			<%= link_to trip.id, trip_path(trip.id) %>: <%= trip.date %>,
+			<%= trip.passenger.name %>, $<%= '%.2f' % (trip.cost / 100.0) %>,
+			<%= trip.rating %>
+		</li>
 	<% end %>
 </ul>

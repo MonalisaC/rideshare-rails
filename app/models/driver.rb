@@ -10,4 +10,7 @@ class Driver < ApplicationRecord
     return trips.inject(0.0) { |sum, trip| sum + trip.rating } / trips.size
   end
 
+  def get_average_pay
+  end
+
 end

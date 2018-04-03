@@ -26,7 +26,6 @@ class Driver < ApplicationRecord
     return '%.2f' % (get_earning_after_fee(cost) / 100)
   end
 
-
   private
 
   def find_completed_trips

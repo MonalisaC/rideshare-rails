@@ -6,16 +6,22 @@
 	<li><%= @driver.car_make %></li>
 	<li><%= @driver.car_model %></li>
 	<li>Average rating: <%= @driver.get_average_rating %></li>
-	<!-- <li>Total </li> -->
+	<li>Total </li>
 </ul>
 
-<ul>
+<section class="trips-for-driver">
+<!-- <ul> -->
 	<% @driver.get_completed_trips.each do |trip| %>
-		<li>
-			<%= link_to trip.id, trip_path(trip.id) %>: <%= trip.date %>,
-			<%= trip.passenger.name %>, $<%= '%.2f' % (trip.cost / 100.0) %>
-			($<%= @driver.get_earning_from_cost(trip.cost) %>),
-			<%= trip.rating %>
-		</li>
+		<!-- <li> -->
+			<ul>
+				<li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
+				<li>Date: <%= trip.date %></li>
+				<li>Passenger: <%= trip.passenger.name %>,</li>
+				<li>Cost (earned): $<%= '%.2f' % (trip.cost / 100.0) %>
+		 			($<%= @driver.get_earning_from_cost(trip.cost) %>),</li>
+			 	<li>Rating: <%= trip.rating %></li>
+			</ul>
+		<!-- </li> -->
 	<% end %>
-</ul>
+<!-- </ul> -->
+</section>

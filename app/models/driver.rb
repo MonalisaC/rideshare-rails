@@ -17,7 +17,7 @@ class Driver < ApplicationRecord
 
   #
   def get_average_rating
-    return calculate_average_rating#.round(2)
+    return '%.2f' % calculate_average_rating
   end
 
   # Returns
@@ -38,12 +38,15 @@ class Driver < ApplicationRecord
   private
 
   def find_completed_trips
-    return self.trips.where.not(rating: nil)
+    # return trips.where(is_complete: true)
+
+    return self.trips.select { |trip| trip if trip.is_complete? }
+    # return self.trips.where.not(rating: nil)
   end
 
   def calculate_average_rating
     trips = self.get_completed_trips
-    return "-" if trips.empty?
+    # return "--" if trips.empty?
     return trips.inject(0.0) { |sum, trip| sum + trip.rating } / trips.size
   end
 

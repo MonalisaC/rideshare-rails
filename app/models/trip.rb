@@ -12,4 +12,8 @@ class Trip < ApplicationRecord
     return (cost/100.00).round(2)
   end
 
+  def is_complete?
+    return !:rating.nil?
+  end
+
 end

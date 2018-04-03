@@ -55,11 +55,6 @@ class PassengersController < ApplicationController
     end
   end
 
-  def total_charged
-    @passenger.trips.each do |trip|
-    end
-  end
-
   private
 
   def passenger_params

@@ -8,9 +8,23 @@ class TripsController < ApplicationController
   end
 
   def new
+    @trip = Trip.new
   end
 
   def create
+    @trip = Trip.new
+    @trip.driver = Driver.all.sample
+    @trip.passenger = Passenger.find_by(id: params[:psngr_id])
+    @trip.rating = 0
+    @trip.date = Date.today
+    @trip.cost = rand(1000..3000)
+
+    if @trip.save
+      redirect_to @trip
+    else
+      render :new
+    end
+
   end
 
   def edit
@@ -22,7 +36,7 @@ class TripsController < ApplicationController
     @trip = Trip.find_by(id: params[:id])
     if !@trip.nil?
       if @trip.update(trip_params)
-        redirect_to trips_path(@trip.id)
+        redirect_to trip_path(@trip.id)
       else
         render :edit
       end

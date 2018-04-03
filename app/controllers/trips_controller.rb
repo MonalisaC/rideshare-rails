@@ -1,6 +1,6 @@
 class TripsController < ApplicationController
   def index
-    @trips = Trip.all.order(params[:date])
+    @trips = Trip.all.order(id: :asc)
   end
 
   def show
@@ -14,9 +14,21 @@ class TripsController < ApplicationController
   end
 
   def edit
+    @trip = Trip.find_by(id: params[:id])
+
   end
 
   def update
+    @trip = Trip.find_by(id: params[:id])
+    if !@trip.nil?
+      if @trip.update(trip_params)
+        redirect_to trips_path(@trip.id)
+      else
+        render :edit
+      end
+    else
+      redirect_to trips_path
+    end
   end
 
   def destroy

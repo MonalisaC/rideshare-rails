@@ -47,6 +47,19 @@ class PassengersController < ApplicationController
     redirect_to passengers_path
   end
 
+  def show_trips
+    id = params[:id]
+    passenger = Passenger.find(id)
+    @passenger.trips.each do |trip|
+      print trip
+    end
+  end
+
+  def total_charged
+    @passenger.trips.each do |trip|
+    end
+  end
+
   private
 
   def passenger_params

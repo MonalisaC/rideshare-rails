@@ -1,6 +1,9 @@
 class Passenger < ApplicationRecord
   has_many :trips
 
+  validates :name, presence: true, length: { in: 2..250 }
+  validates :phone_num, presence: true, :uniqueness => true 
+
   def display_rides_taken
     get_rides_taken.each do |trip|
       puts "Trip id: #{link_to trip.id, trip_path(trip.id)}"

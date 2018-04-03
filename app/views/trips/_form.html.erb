@@ -1,5 +1,16 @@
 <h2><%= page_title %></h2>
 
+<% if @trip.errors.any? %>
+  <ul class="errors">
+    <% @trip.errors.each do |field, message| %>
+      <li>
+        <strong><%= field.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <%= form_for @trip do |f| %>
 <%= f.label :date %>
 <%= f.date_field :date %>

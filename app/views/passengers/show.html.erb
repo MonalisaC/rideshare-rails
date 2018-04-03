@@ -1,8 +1,15 @@
-<h2> Passenger name: <%= @passenger.name %> <h2>
-  <h3>   Phone number: <%= @passenger.phone_num %> <h3>
 
-    Trips:
-    <section>
+<h1>Passenger Info</h1>
+
+<section class="passenger-summary">
+  <h2> Passenger name: <%= @passenger.name %> <h2>
+    <h3>   Phone number: <%= @passenger.phone_num %> <h3>
+      <p> Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %> </p>
+    </section>
+
+    <section class="trips-for-passenger">
+      <p></p>
+    <h3>  Trips:</h3>
       <% @passenger.get_rides_taken.each do |trip| %>
       <ul>
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
@@ -14,18 +21,37 @@
       </ul>
       <% end %>
     </section>
-    Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %>
 
-  </p>
-  <ul>
-    <li>
-      <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
-      <!-- Updated to make sure the new trip will be for current passenger -->
-    </li>
-    <li>
-      <%= link_to "Edit", edit_passenger_path %>
-    </li>
-    <li>
-      <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-    </li>
-  </ul>
+    <section class="incomplete-trips-for-passenger">
+      <p></p>
+    <h3>  Incomplete Trips: </h3>
+      <% @passenger.get_incomplete_trips.each do |trip| %>
+      <ul>
+        <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
+        <li>Date: <%= trip.date %></li>
+        <li>Driver: <%= trip.driver.name %></li>
+        <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
+        <li>Rating: <%= trip.rating %></li>
+        <%= link_to "Edit", edit_trip_path %>
+        <p> </p>
+
+      </ul>
+      <% end %>
+    </section>
+
+    <section class="passenger-options">
+      <h3> Options </h3>
+      <ul>
+
+        <li>
+          <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
+          <!-- Updated to make sure the new trip will be for current passenger -->
+        </li>
+        <li>
+          <%= link_to "Edit", edit_passenger_path %>
+        </li>
+        <li>
+          <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      </ul>
+    </section>

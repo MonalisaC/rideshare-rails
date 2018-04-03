@@ -8,6 +8,10 @@ class Passenger < ApplicationRecord
     return find_rides_taken
   end
 
+  def get_incomplete_trips
+    return find_incomplete_trips
+  end
+
   def get_total_charged
     return calculate_total_charged
   end
@@ -16,6 +20,10 @@ class Passenger < ApplicationRecord
 
   def find_rides_taken
     return self.trips.where.not(rating: nil)
+  end
+
+  def find_incomplete_trips
+    return self.trips.where(rating: nil)
   end
 
   def calculate_total_charged

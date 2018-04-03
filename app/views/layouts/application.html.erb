@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>RideshareRails</title>
-    <%= csrf_meta_tags %>
+<head>
+  <title>RideshareRails</title>
+  <%= csrf_meta_tags %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <header>
-  <nav>
-    <ul>
-      <li>
-        <%= link_to "Rideshare Rails!", trips_path %>
-      </li>
-      <li>
-        <%= link_to "Passengers", passengers_path %>
-        <ul>
-          <li>
-            <%= link_to "Add Passenger", new_passenger_path %>
-          </li>
-        </ul>
-      </li>
-      <li>
-        <%= link_to "Drivers", drivers_path %>
-        <ul>
-          <li>
-            <%= link_to "Add Driver", new_driver_path %>
-          </li>
-        </ul>
-      </li>
-    </ul>
-  </nav>
-</header>
-
+<body>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <%= link_to "Rideshare Rails!", trips_path %>
+        </li>
+        <li>
+          <%= link_to "Passengers", passengers_path %>
+          <ul>
+            <li>
+              <%= link_to "Add Passenger", new_passenger_path %>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <%= link_to "Drivers", drivers_path %>
+          <ul>
+            <li>
+              <%= link_to "Add Driver", new_driver_path %>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <div>
+    <% flash.each do |key, value| %>
+    <div><%= value %></div>
+    <% end %>
+  </div>
+  <main>
     <%= yield %>
-  </body>
+  </main>
+</body>
 </html>

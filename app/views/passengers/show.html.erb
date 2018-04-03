@@ -8,13 +8,13 @@
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
-        <li>Cost: <%= trip.cost %></li>
+        <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
         <li>Rating: <%= trip.rating %></li>
         <p> </p>
       </ul>
       <% end %>
     </section>
-    Total charges: $<%= '%.2f' % @passenger.get_total_charged %>
+    Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %>
 
   </p>
   <ul>

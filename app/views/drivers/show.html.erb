@@ -6,7 +6,7 @@
 	<li><%= @driver.car_make %></li>
 	<li><%= @driver.car_model %></li>
 	<li>Average rating: <%= @driver.get_average_rating %></li>
-	<li>Total </li>
+	<li>Total earnings:<%= '%.2f' % @driver.get_total_earnings %> </li>
 </ul>
 
 <section class="trips-for-driver">

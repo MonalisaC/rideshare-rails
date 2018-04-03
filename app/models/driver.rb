@@ -17,17 +17,22 @@ class Driver < ApplicationRecord
 
   #
   def get_average_rating
-    return calculate_average_rating.round(2)
+    return calculate_average_rating#.round(2)
   end
 
   # Returns
   def get_total_earnings
-    return calculate_total_earning
+    #  '%.2f' is needed in case driver has not earned anything
+    return '%.2f' % calculate_total_earning
   end
 
   def get_earning_from_cost(cost)
     raise ArgumentError.new("Invalid cost") if !cost.is_a?(Float)
     return get_earning_after_fee(cost).round(2)
+  end
+
+  def is_new_driver?
+    return get_completed_trips.empty?
   end
 
   private
@@ -38,6 +43,7 @@ class Driver < ApplicationRecord
 
   def calculate_average_rating
     trips = self.get_completed_trips
+    return "-" if trips.empty?
     return trips.inject(0.0) { |sum, trip| sum + trip.rating } / trips.size
   end
 
@@ -47,7 +53,7 @@ class Driver < ApplicationRecord
   end
 
   def get_earning_after_fee(cost)
-    return cost < TRIP_FEE ? 0.0 : (cost - TRIP_FEE) * 0.8
+    return cost < TRIP_FEE ? 0.00 : (cost - TRIP_FEE) * 0.8
   end
 
 end

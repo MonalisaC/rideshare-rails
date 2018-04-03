@@ -4,7 +4,7 @@ class DriversController < ApplicationController
   end
 
   def show
-    @driver = Driver.find(params[:id])
+    @driver = Driver.all.find(params[:id])
   end
 
   def new
@@ -12,7 +12,8 @@ class DriversController < ApplicationController
   end
 
   def create
-    Driver.create(driver_params).save ? (redirect_to root_path) : (render :new)
+    @driver = Driver.new(driver_params)
+    @driver.save ? (redirect_to driver_path(@driver.id)) : (render :new)
   end
 
   def edit
@@ -22,15 +23,22 @@ class DriversController < ApplicationController
   def update
     @driver = Driver.find_by(id: params[:id])
     if !@driver.nil?
-      @driver.update(driver_params) ? (redirect_to driver_path) : (render :edit)
+      @driver.update(driver_params) ? (redirect_to driver_path(@driver.id)) :
+        (render :edit)
     else
-      redirect_to driver_path
+      redirect_to drivers_path
     end
+    # if !@driver.nil?
+    #   @driver.update(driver_params) ? (redirect_to driver_path(@driver.id)) :
+    #     (render :edit)
+    # else
+    #   redirect_to driver_path
+    # end
   end
 
   def destroy
     Driver.find(params[:id]).destroy
-    redirect_to root_path
+    redirect_to drivers_path
   end
 
   private

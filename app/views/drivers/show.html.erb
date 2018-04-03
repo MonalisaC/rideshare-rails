@@ -13,6 +13,8 @@
 
 <ul>
 	<li><%= link_to "Edit", edit_driver_path %></li>
+	<li><%= link_to "Delete", driver_path(@driver.id), method: :delete, data: { confirm:
+		'Are you sure?' } %></li>
 </ul>
 
 <section class="trips-for-driver">

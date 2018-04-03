@@ -29,8 +29,8 @@ class DriversController < ApplicationController
   end
 
   def destroy
-    # Passenger.find(params[:id]).destroy
-    # redirect_to root_path
+    Driver.find(params[:id]).destroy
+    redirect_to root_path
   end
 
   private

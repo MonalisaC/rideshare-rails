@@ -2,30 +2,30 @@
   <h3>   Phone number: <%= @passenger.phone_num %> <h3>
 
     Trips:
-<section>
-    <% @passenger.get_rides_taken.each do |trip| %>
+    <section>
+      <% @passenger.get_rides_taken.each do |trip| %>
       <ul>
-        <li><%= "Trip id: #{link_to trip.id, trip_path(trip.id)}"  %></li>
-        <li><%= "Date: #{trip.date}" %></li>
-        <li><%= "Driver: #{trip.driver.name}" %></li>
-        <li><%= "Cost: #{trip.cost}" %></li>
-        <li><%= "Rating: #{trip.rating}" %></li>
+        <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
+        <li>Date: <%= trip.date %></li>
+        <li>Driver: <%= trip.driver.name %></li>
+        <li>Cost: <%= trip.cost %></li>
+        <li>Rating: <%= trip.rating %></li>
         <p> </p>
       </ul>
-    <% end %>
-</section>
-Total charges: $<%= '%.2f' % @passenger.get_total_charged %>
+      <% end %>
+    </section>
+    Total charges: $<%= '%.2f' % @passenger.get_total_charged %>
 
-      </p>
-      <ul>
-        <li>
-          <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
-          <!-- Updated to make sure the new trip will be for current passenger -->
-        </li>
-        <li>
-          <%= link_to "Edit", edit_passenger_path %>
-        </li>
-        <li>
-          <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
-        </li>
-      </ul>
+  </p>
+  <ul>
+    <li>
+      <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
+      <!-- Updated to make sure the new trip will be for current passenger -->
+    </li>
+    <li>
+      <%= link_to "Edit", edit_passenger_path %>
+    </li>
+    <li>
+      <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+    </li>
+  </ul>

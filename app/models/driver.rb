@@ -32,17 +32,18 @@ class Driver < ApplicationRecord
   end
 
   def get_status
-    return is_available && !has_in_progress_trip ? "Available" : "Unavailable"
+    return is_available ? "Available" : "Unavailable"
+    # return is_available && !has_in_progress_trip ? "Available" : "Unavailable"
   end
 
-  def has_in_progress_trip
-    return trips.any? { |trip| !trip.is_complete? }
+  def has_in_progress_trip?
+    return !has_only_completed_trips?
   end
 
   private
 
   def has_only_completed_trips?
-    return self.trips.any? { |trip| !trip.is_complete? }
+    return self.trips.all? { |trip| trip.is_complete? }
   end
 
   def find_completed_trips

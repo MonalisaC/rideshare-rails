@@ -1,35 +1,35 @@
 <%= form_title %>
 
-<% if @driver.errors.any? %>
-  <ul>
-    <% @driver.errors.each do |column, message| %>
-      <li>
-        <strong><%= column.capitalize %></strong> <%= message %>
-      </li>
-    <% end %>
-  </ul>
-<% end %>
+  <% if @driver.errors.any? %>
+    <ul>
+      <% @driver.errors.each do |column, message| %>
+        <li>
+          <strong><%= column.capitalize %></strong> <%= message %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 
-<%= form_for @driver do |f| %>
+  <%= form_for @driver do |f| %>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
 
-  <%= f.label :is_available %>
-  <%= f.check_box :is_available, :disabled => @driver.has_in_progress_trip? %>
+    <%= f.label :is_available %>
+    <%= f.check_box :is_available, :disabled => @driver.has_in_progress_trip? %>
 
-  <%= f.label :vin %>
-  <%= f.text_field :vin %>
+    <%= f.label :vin %>
+    <%= f.text_field :vin %>
 
-	<%= f.label :car_make %>
-	<%= f.select :car_make, ["Ford", "Honda", "Hyundai", "Nissan", "Toyota"] %>
+  	<%= f.label :car_make %>
+  	<%= f.select :car_make, ["Ford", "Honda", "Hyundai", "Nissan", "Toyota"] %>
 
-	<%= f.label :car_model %>
-	<%= f.select :car_model, ["Escape", "Focus", "Fiesta", "Accord", "Civic",
-		"CR-V", "Elantra", "Santa Fe", "Sonata", "Altma", "Leaf", "PathFinder",
-		 "RAV4", "Prius", "Camry"] %>
+  	<%= f.label :car_model %>
+  	<%= f.select :car_model, ["Escape", "Focus", "Fiesta", "Accord", "Civic",
+  		"CR-V", "Elantra", "Santa Fe", "Sonata", "Altma", "Leaf", "PathFinder",
+  		 "RAV4", "Prius", "Camry"] %>
 
 
-<%= f.submit  %>
+  <%= f.submit  %>
 
-<% end %>
+  <% end %>

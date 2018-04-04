@@ -1,1 +1,5 @@
-<%= render partial: "form", locals: { form_title: "Edit #{@driver.name}" } %>
+<% if !@driver.is_deactivated %>
+	<%= render partial: "form", locals: { form_title: "Edit #{@driver.name}" } %>
+<% else %>
+	<h2>Driver #<%= @driver.id %> is deactivated!</h2>
+<% end %>

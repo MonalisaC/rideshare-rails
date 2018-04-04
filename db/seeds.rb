@@ -21,6 +21,7 @@ CSV.foreach(DRIVER_FILE, :headers => true) do |row|
   driver.car_make = car[:make]
   driver.car_model = car[:models].sample
   driver.is_available = rand(2).even? # randomly sets status
+  driver.is_deactivated = false
   successful = driver.save
   if !successful
     driver_failures << driver

@@ -31,8 +31,8 @@ class Driver < ApplicationRecord
     return get_earning_after_fee(cost).round(2)
   end
 
-  def is_available?
-    return has_only_completed_trips?
+  def get_status
+    return is_available ? "Available" : "Unavailable"
   end
 
   private

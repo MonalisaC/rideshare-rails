@@ -28,12 +28,6 @@ class DriversController < ApplicationController
     else
       redirect_to drivers_path
     end
-    # if !@driver.nil?
-    #   @driver.update(driver_params) ? (redirect_to driver_path(@driver.id)) :
-    #     (render :edit)
-    # else
-    #   redirect_to driver_path
-    # end
   end
 
   def destroy

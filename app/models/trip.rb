@@ -13,7 +13,7 @@ class Trip < ApplicationRecord
   end
 
   def is_complete?
-    return !:rating.nil?
+    return !self.rating.nil?
   end
 
 end

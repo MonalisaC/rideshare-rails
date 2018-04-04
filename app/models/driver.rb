@@ -32,27 +32,31 @@ class Driver < ApplicationRecord
   end
 
   def get_status
-    return is_available ? "Available" : "Unavailable"
+    return is_available && !has_in_progress_trip ? "Available" : "Unavailable"
+  end
+
+  def has_in_progress_trip
+    return trips.any? { |trip| !trip.is_complete? }
   end
 
   private
 
   def has_only_completed_trips?
-    return trips.any? { |trip| !trip.is_complete? }
+    return self.trips.any? { |trip| !trip.is_complete? }
   end
 
   def find_completed_trips
-    return self.trips.select { |trip| trip if trip.is_complete? }
+    return self.trips.select { |trip| trip.is_complete? }
   end
 
   def calculate_average_rating
-    trips = self.get_completed_trips
-    return trips.inject(0.0) { |sum, trip| sum + trip.rating } / trips.size
+    completed_trips = get_completed_trips
+    return completed_trips.inject(0.0) { |sum, trip| sum + trip.rating } / completed_trips.size
   end
 
   def calculate_total_earning
-    trips = self.get_completed_trips
-    return trips.inject(0.0) { |sum, trip| sum + get_earned_amount(trip.cost_usd) }
+    completed_trips = get_completed_trips
+    return completed_trips.inject(0.0) { |sum, trip| sum + get_earned_amount(trip.cost_usd) }
   end
 
   def get_earning_after_fee(cost)

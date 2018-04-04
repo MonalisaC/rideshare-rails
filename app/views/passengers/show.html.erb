@@ -57,7 +57,7 @@
           <%= link_to "Edit", edit_passenger_path %>
         </li>
         <li>
-          <%= link_to "Delete", passenger_path(@passenger.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id), method: :patch, data: { confirm: 'Are you sure?' }  %>
         </li>
       </ul>
     </section>

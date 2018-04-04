@@ -55,6 +55,13 @@ class PassengersController < ApplicationController
     end
   end
 
+  def mark_deactivate
+    @passenger = Passenger.find(params[:id])
+    @passenger.update(is_deactivated: true)
+    @passenger.save
+    redirect_to root_path
+  end
+
   private
 
   def passenger_params

@@ -9,7 +9,7 @@
 
     <section class="trips-for-passenger">
       <p></p>
-    <h3>  Trips:</h3>
+      <h3>  Trips:</h3>
       <% @passenger.get_rides_taken.each do |trip| %>
       <ul>
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
@@ -24,16 +24,22 @@
 
     <section class="incomplete-trips-for-passenger">
       <p></p>
-    <h3>  Incomplete Trips: </h3>
+      <h3>  Incomplete Trips: </h3>
       <% @passenger.get_incomplete_trips.each do |trip| %>
       <ul>
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
         <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
-        <li>Rating: <%= trip.rating %></li>
+
+        <%= form_for trip do |f| %>
+        <%= f.label :rating %>
+        <%= f.select :rating, [1, 2, 3, 4, 5]%>
+        <%= f.submit%>
+        <% end %>
+
         <%= link_to "Edit", edit_trip_path %>
-        <p> </p>
+        <br/>
 
       </ul>
       <% end %>

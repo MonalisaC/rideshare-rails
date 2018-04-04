@@ -4,6 +4,10 @@ class Passenger < ApplicationRecord
   validates :name, presence: true, length: { in: 2..250 }
   validates :phone_num, presence: true, :uniqueness => true
 
+  def get_active_passengers
+    return find_active_passengers
+  end
+
   def get_rides_taken
     return find_rides_taken
   end
@@ -29,6 +33,10 @@ class Passenger < ApplicationRecord
   def calculate_total_charged
     trips = self.get_rides_taken
     return trips.inject(0.0) { |sum, trip| sum + trip.cost}
+  end
+
+  def find_active_passengers
+    return self.passengers.where(is_deactivated: false)
   end
 
 end

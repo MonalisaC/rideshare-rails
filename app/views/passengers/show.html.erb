@@ -1,6 +1,8 @@
 
 <h1>Passenger Info</h1>
 
+<% if @passenger.is_deactivated != true %>
+
 <section class="passenger-summary">
   <h2> Passenger name: <%= @passenger.name %> <h2>
     <h3>   Phone number: <%= @passenger.phone_num %> <h3>
@@ -61,3 +63,9 @@
         </li>
       </ul>
     </section>
+
+    <% else %>
+
+ Passenger <%= @passenger.id %>  has been deactivated.
+
+    <% end %>

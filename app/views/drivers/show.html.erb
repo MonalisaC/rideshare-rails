@@ -11,10 +11,9 @@
 	<li>Status: <%= @driver.get_status %> </li>
 </ul>
 
-
 <ul>
 	<li><%= link_to "Edit", edit_driver_path %></li>
-	<li><%= link_to "Delete", driver_path(@driver.id), method: :delete, data: { confirm:
+	<li><%= link_to "Deactivate", mark_is_deactivated_path(@driver.id), method: :patch, data: { confirm:
 		'Are you sure?' } %></li>
 </ul>
 

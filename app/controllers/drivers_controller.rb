@@ -30,6 +30,13 @@ class DriversController < ApplicationController
     end
   end
 
+  def is_deactivated
+    @driver = Driver.find(params[:id])
+    @driver.update(is_deactivated: true)
+    @driver.save
+    redirect_to root_path
+  end
+
   def destroy
     Driver.all.find(params[:id]).destroy
     redirect_to drivers_path

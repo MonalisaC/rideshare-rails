@@ -13,7 +13,12 @@ class DriversController < ApplicationController
 
   def create
     @driver = Driver.new(driver_params)
-    @driver.save ? (redirect_to driver_path(@driver.id)) : (render :new)
+    if @driver.save
+
+      redirect_to driver_path(@driver.id)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -32,7 +37,7 @@ class DriversController < ApplicationController
 
   def is_deactivated
     @driver = Driver.find(params[:id])
-    @driver.update(is_deactivated: true)
+    @driver.update(is_deactivated: true, is_available: false)
     @driver.save
     redirect_to root_path
   end

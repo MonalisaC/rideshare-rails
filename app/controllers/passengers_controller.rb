@@ -14,7 +14,7 @@ class PassengersController < ApplicationController
 
   def create
     @passenger = Passenger.new(passenger_params)
-    if passenger.save
+    if @passenger.save
       redirect_to root_path
     else
       render :new
@@ -58,7 +58,7 @@ class PassengersController < ApplicationController
   private
 
   def passenger_params
-    return params.require(:passenger).permit(:name, :phone_num)
+    return params.require(:passenger).permit(:name, :phone_num, :is_deactivated)
   end
 
 end

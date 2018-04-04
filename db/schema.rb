@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 20180404054519) do
     t.string "phone_num"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_deactivated"
   end
 
   create_table "trips", force: :cascade do |t|

@@ -73,7 +73,7 @@ CSV.foreach(TRIP_FILE, :headers => true) do |row|
     trip_failures << trip
     puts "Failed to save trip: #{trip.inspect}"
   else
-    # driver.is_available == false if !trip.is_complete?
+    driver.is_available == false if !trip.is_complete?
     puts "Created trip: #{trip.inspect}"
   end
 end

@@ -20,7 +20,15 @@ class Passenger < ApplicationRecord
     return calculate_total_charged.to_string_rounded
   end
 
+  def has_in_progress_trip?
+    return !has_only_completed_trips?
+  end
+
   private
+
+  def has_only_completed_trips?
+    return self.trips.all? { |trip| trip.is_complete? }
+  end
 
   def find_rides_taken
     return self.trips.where.not(rating: nil)

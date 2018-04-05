@@ -13,14 +13,13 @@
   <section class="trips-for-passenger">
     <p></p>
     <h3>Trips:</h3>
-    <%= render partial: "table", locals: { page_title: "Trips ", table_trips: @passenger.trips} %>
+    <%= render partial: "shared/table", locals: { page_title: "Trips ", table_trips: @passenger.trips} %>
     </section>
 
 
   <section class="passenger-options">
     <h3> Options </h3>
     <ul>
-      <!-- Updated to make sure the new trip will be for current passenger -->
       <li><%= link_to "New Trip", passenger_trips_path(@passenger.id), method: :post %></li>
       <li><%= link_to "Edit", edit_passenger_path %></li>
       <li><%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id),

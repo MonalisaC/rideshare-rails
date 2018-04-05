@@ -17,7 +17,7 @@ class Passenger < ApplicationRecord
   end
 
   def get_total_charged
-    return calculate_total_charged
+    return calculate_total_charged.to_string_rounded
   end
 
   private

@@ -20,4 +20,14 @@ class Trip < ApplicationRecord
     return !self.rating.nil?
   end
 
+  def get_rides
+    return find_rides
+  end
+
+  private
+
+  def find_rides
+    return self.trips
+  end
+
 end

@@ -18,7 +18,6 @@
     <td>$<%= trip.cost_usd %></td>
     <td><% if trip.rating == nil%>
       <%= form_for trip do |f| %>
-
       <%= f.select :rating, [1, 2, 3, 4, 5]%>
       <%= f.submit%>
       <% end %>
@@ -27,5 +26,5 @@
       <% end %></td>
     </tr>
     <% end %>
-    
+
   </table>

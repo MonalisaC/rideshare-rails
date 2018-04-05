@@ -8,11 +8,9 @@
     <th>Cost</th>
     <th>Rating</th>
   </tr>
-  <!-- <% @passenger.get_rides.each do |trip| %> -->
+
   <%table_trips.each do |trip| %>
-  <tr> hello </tr>
-    <tr>
-      <td>
+  <tr>
     <td><%= link_to trip.id, trip_path(trip.id) %></td>
     <td><%= trip.date %></td>
     <td><%= link_to trip.driver.name, driver_path(trip.driver.id) %></td>
@@ -21,15 +19,13 @@
     <td><% if trip.rating == nil%>
       <%= form_for trip do |f| %>
 
-        <%= f.select :rating, [1, 2, 3, 4, 5]%>
-        <%= f.submit%>
+      <%= f.select :rating, [1, 2, 3, 4, 5]%>
+      <%= f.submit%>
       <% end %>
-    <% else %>
+      <% else %>
       <%= trip.rating %>
-    <% end %></td>
+      <% end %></td>
     </tr>
-  <% end %>
-  <tr>middle</tr>
     <% end %>
-    <tr> bye </tr>
-</table>
+    
+  </table>

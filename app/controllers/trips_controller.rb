@@ -13,19 +13,23 @@ class TripsController < ApplicationController
 
   def create
     @trip = Trip.new
-    @trip.driver = find_available_driver #Driver.all.sample
     @trip.passenger = Passenger.find_by(id: params[:passenger_id])
-    @trip.rating = nil
-    @trip.date = Date.today
-    @trip.cost = rand(1000..3000)
-
-    if @trip.save
-      @trip.driver.update(is_available: false)
-      redirect_to @trip
+    @trip.driver = find_available_driver #Driver.all.sample
+    if @trip.driver.nil?
+      flash[:notice] = "Sorry! There are no avaiable drivers right now."
+      redirect_to @trip.passenger
     else
-      render :new
-    end
+      @trip.rating = nil
+      @trip.date = Date.today
+      @trip.cost = rand(1000..3000)
 
+      if @trip.save
+        @trip.driver.update(is_available: false)
+        redirect_to @trip
+      else
+        render :new
+      end
+    end
   end
 
   def edit
@@ -59,10 +63,10 @@ end
 private
 
 def find_available_driver
-  return Driver.where(is_available: true).sample
+  return Driver.where(is_available: true, is_deactivated: false).sample
 end
 
 def trip_params
   params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id,
-    :is_available)
+  :is_available)
 end

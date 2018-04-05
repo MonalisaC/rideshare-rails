@@ -18,9 +18,7 @@
 	</ul>
 
 	<section class="trips-table">
-	<!-- <ul> -->
 		<% @driver.get_completed_trips.each do |trip| %>
-			<!-- <li> -->
 				<ul>
 					<li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
 					<li>Date: <%= trip.date %></li>

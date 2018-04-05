@@ -32,7 +32,7 @@ class Passenger < ApplicationRecord
 
   def calculate_total_charged
     trips = self.get_rides_taken
-    return trips.inject(0.0) { |sum, trip| sum + trip.cost}
+    return trips.inject(0.0) { |sum, trip| sum + trip.cost_usd }
   end
 
   def find_active_passengers

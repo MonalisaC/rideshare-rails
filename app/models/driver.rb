@@ -6,25 +6,25 @@ class Driver < ApplicationRecord
 
   TRIP_FEE = 1.65
 
-  # Returns all the completed trips for the driver
   def get_completed_trips
    return find_completed_trips
   end
 
   #
   def get_average_rating
-    return '%.2f' % calculate_average_rating
+    return get_completed_trips.empty? ? "--" : calculate_average_rating.to_string_rounded
+    # return '%.2f' % calculate_average_rating
   end
 
-  # Returns
   def get_total_earnings
-    #  '%.2f' is needed in case driver has not earned anything
-    return '%.2f' % calculate_total_earning
+    return calculate_total_earning.to_string_rounded
+    # return '%.2f' % calculate_total_earning
   end
 
   def get_earned_amount(cost)
     raise ArgumentError.new("Invalid cost") if !cost.is_a?(Float)
-    return get_earning_after_fee(cost).round(2)
+    return get_earning_after_fee(cost).to_string_rounded
+    # return '%.2f' % get_earning_after_fee(cost)
   end
 
   def get_status
@@ -47,16 +47,25 @@ class Driver < ApplicationRecord
 
   def calculate_average_rating
     completed_trips = get_completed_trips
-    return completed_trips.inject(0.0) { |sum, trip| sum + trip.rating } / completed_trips.size
+    return completed_trips.inject(0.0) { |sum, trip| sum + trip.rating
+      } / completed_trips.size
   end
 
   def calculate_total_earning
-    completed_trips = get_completed_trips
-    return completed_trips.inject(0.0) { |sum, trip| sum + get_earned_amount(trip.cost_usd) }
+    return get_completed_trips.inject(0.0) { |sum, trip| sum +
+      get_earning_after_fee(trip.cost_usd) }
   end
 
   def get_earning_after_fee(cost)
-    return cost < TRIP_FEE ? 0.00 : (cost - TRIP_FEE) * 0.8
+    return cost < TRIP_FEE ? 0.0 : (cost - TRIP_FEE) * 0.8
+  end
+
+end
+
+class Float
+
+  def to_string_rounded
+    '%.2f' % self
   end
 
 end

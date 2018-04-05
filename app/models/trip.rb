@@ -9,7 +9,7 @@ class Trip < ApplicationRecord
   validates :passenger_id, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   def cost_usd
-    return (cost/100.00).round(2)
+    return (cost / 100.0).round(2)
   end
 
   def is_complete?

@@ -2,12 +2,12 @@
 
 <h1>Passenger Info</h1>
 
-<% if @passenger.is_deactivated != true %>
+<% if !@passenger.is_deactivated%>
 
   <section class="passenger-summary">
     <h2>Passenger name: <%= @passenger.name %><h2>
     <h3>Phone number: <%= @passenger.phone_num %><h3>
-    <p>Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %></p>
+    <p>Total charges: $<%= '%.2f' % @passenger.get_total_charged %></p>
   </section>
 
   <section class="trips-for-passenger">
@@ -18,7 +18,7 @@
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
-        <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
+        <li>Cost: $<%= '%.2f' % trip.cost_usd %></li>
         <li>Rating: <%= trip.rating %></li>
         <p></p>
       </ul>
@@ -33,7 +33,7 @@
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
-        <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
+        <li>Cost: $<%= '%.2f' % trip.cost_usd %></li>
 
         <!-- ratings field -->
         <%= form_for trip do |f| %>

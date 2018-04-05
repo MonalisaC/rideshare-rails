@@ -47,13 +47,13 @@ class PassengersController < ApplicationController
     redirect_to passengers_path
   end
 
-  def show_trips
-    id = params[:id]
-    passenger = Passenger.find(id)
-    @passenger.trips.each do |trip|
-      print trip
-    end
-  end
+  # def show_trips
+  #   id = params[:id]
+  #   passenger = Passenger.find(id)
+  #   @passenger.trips.each do |trip|
+  #     print trip
+  #   end
+  # end
 
   def mark_deactivate
     @passenger = Passenger.find(params[:id])

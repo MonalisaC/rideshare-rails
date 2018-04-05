@@ -12,6 +12,10 @@ class Trip < ApplicationRecord
     return (cost / 100.0).round(2)
   end
 
+  def cost_in_dollars
+    return cost / 100.0
+  end
+
   def is_complete?
     return !self.rating.nil?
   end

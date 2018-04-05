@@ -16,7 +16,7 @@ class TripsController < ApplicationController
     @trip.passenger = Passenger.find_by(id: params[:passenger_id])
     @trip.driver = find_available_driver #Driver.all.sample
     if @trip.driver.nil?
-      flash[:notice] = "Sorry! There are no avaiable drivers right now."
+      flash[:notice] = "Sorry! There are no available drivers right now."
       redirect_to @trip.passenger
     else
       @trip.rating = nil
@@ -63,7 +63,8 @@ end
 private
 
 def find_available_driver
-  return Driver.where(is_available: true, is_deactivated: false).sample
+  #
+  return Driver.where(is_available: true).sample
 end
 
 def trip_params

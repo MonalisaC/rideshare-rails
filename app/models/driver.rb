@@ -13,18 +13,15 @@ class Driver < ApplicationRecord
   #
   def get_average_rating
     return get_completed_trips.empty? ? "--" : calculate_average_rating.to_string_rounded
-    # return '%.2f' % calculate_average_rating
   end
 
   def get_total_earnings
     return calculate_total_earning.to_string_rounded
-    # return '%.2f' % calculate_total_earning
   end
 
   def get_earned_amount(cost)
     raise ArgumentError.new("Invalid cost") if !cost.is_a?(Float)
     return get_earning_after_fee(cost).to_string_rounded
-    # return '%.2f' % get_earning_after_fee(cost)
   end
 
   def get_status
@@ -63,9 +60,7 @@ class Driver < ApplicationRecord
 end
 
 class Float
-
   def to_string_rounded
     '%.2f' % self
   end
-
 end

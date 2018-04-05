@@ -2,16 +2,13 @@
 
 <% if !@passenger.is_deactivated%>
 
-  <section class="passenger-summary">
-    <h2>Passenger name: <%= @passenger.name %><h2>
-    <h3>Phone number: <%= @passenger.phone_num %><h3>
-    <p>Total charges: $<%= @passenger.get_total_charged %></p>
+  <section class="user-info">
+    <h2 class="page-subheader"><%= @passenger.name %><h2>
+    <ul>
+      <li>Phone number: <%= @passenger.phone_num %></li>
+      <li>Total charges: $<%= @passenger.get_total_charged %></li>
+    </ul>
   </section>
-
-  <section class="trips-for-passenger">
-    <h3>Trips:</h3>
-    <%= render partial: "shared/table", locals: {table_trips: @passenger.trips} %>
-    </section>
 
   <section class="options">
     <h3> Options </h3>
@@ -23,6 +20,11 @@
     </ul>
   </section>
 
+  <section class="trips">
+    <h3>Trips</h3>
+    <%= render partial: "shared/table", locals: {table_trips: @passenger.trips} %>
+  </section>
+
 <% else %> <!-- passenger is deactivated-->
-  <h2>Passenger <%= @passenger.id %> has been deactivated.</h2>
+  <section class="deactivated-message">Passenger #<%= @passenger.id %> has been deactivated.</section>
 <% end %>

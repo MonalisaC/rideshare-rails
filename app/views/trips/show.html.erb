@@ -1,11 +1,7 @@
-<<<<<<< HEAD
-<h1 class="page-header">Trip #<%= @trip.id %></h1>
-<%= render partial: "shared/table", locals: { page_title: "Trips ", table_trips: [@trip]} %>
-=======
-<h2> Trip #<%= @trip.id %> </h2>
+<h1 class="page-header">Trip Info</h1>
+<h2 class="page-subheader">Trip #<%= @trip.id %></h2>
 <%= render partial: "shared/table", locals: { page_title: "Trips ", table_trips: [@trip]} %>
 <section class="options">
->>>>>>> fa36b19bf0876ee120264838e6a9d69dda5db329
 <%= link_to "Back", trips_path %>
 <%= link_to "Delete", trip_path(@trip.id), method: :delete, data: {confirm: "You sure?"} %>
 <%= link_to "Edit", edit_trip_path %>

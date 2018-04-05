@@ -63,9 +63,7 @@ class Driver < ApplicationRecord
 end
 
 class Float
-
   def to_string_rounded
     '%.2f' % self
   end
-
 end

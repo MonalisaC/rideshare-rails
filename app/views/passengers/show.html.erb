@@ -1,71 +1,65 @@
+<!-- TODO: Address the <p></p> thing with css or <br /> ?? -->
 
 <h1>Passenger Info</h1>
 
 <% if @passenger.is_deactivated != true %>
 
-<section class="passenger-summary">
-  <h2> Passenger name: <%= @passenger.name %> <h2>
-    <h3>   Phone number: <%= @passenger.phone_num %> <h3>
-      <p> Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %> </p>
-    </section>
+  <section class="passenger-summary">
+    <h2>Passenger name: <%= @passenger.name %><h2>
+    <h3>Phone number: <%= @passenger.phone_num %><h3>
+    <p>Total charges: $<%= '%.2f' % (@passenger.get_total_charged / 100) %></p>
+  </section>
 
-    <section class="trips-for-passenger">
-      <p></p>
-      <h3>  Trips:</h3>
-      <% @passenger.get_rides_taken.each do |trip| %>
+  <section class="trips-for-passenger">
+    <p></p>
+    <h3>Trips:</h3>
+    <% @passenger.get_rides_taken.each do |trip| %>
       <ul>
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
         <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
         <li>Rating: <%= trip.rating %></li>
-        <p> </p>
+        <p></p>
       </ul>
-      <% end %>
-    </section>
+    <% end %>
+  </section>
 
-    <section class="incomplete-trips-for-passenger">
-      <p></p>
-      <h3>  Incomplete Trips: </h3>
-      <% @passenger.get_incomplete_trips.each do |trip| %>
+  <section class="incomplete-trips-for-passenger">
+    <p></p>
+    <h3>Incomplete Trips:</h3>
+    <% @passenger.get_incomplete_trips.each do |trip| %>
       <ul>
         <li>Trip id: <%= link_to trip.id, trip_path(trip.id) %></li>
         <li>Date: <%= trip.date %></li>
         <li>Driver: <%= trip.driver.name %></li>
         <li>Cost: $<%= '%.2f' % (trip.cost / 100.0) %></li>
 
+        <!-- ratings field -->
         <%= form_for trip do |f| %>
-        <%= f.label :rating %>
-        <%= f.select :rating, [1, 2, 3, 4, 5]%>
-        <%= f.submit%>
+          <%= f.label :rating %>
+          <%= f.select :rating, [1, 2, 3, 4, 5]%>
+          <%= f.submit%>
         <% end %>
 
         <%= link_to "Edit", edit_trip_path %>
         <br/>
-
       </ul>
-      <% end %>
-    </section>
-
-    <section class="passenger-options">
-      <h3> Options </h3>
-      <ul>
-
-        <li>
-          <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
-          <!-- Updated to make sure the new trip will be for current passenger -->
-        </li>
-        <li>
-          <%= link_to "Edit", edit_passenger_path %>
-        </li>
-        <li>
-          <%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id), method: :patch, data: { confirm: 'Are you sure?' }  %>
-        </li>
-      </ul>
-    </section>
-
-    <% else %>
-
- Passenger <%= @passenger.id %>  has been deactivated.
-
     <% end %>
+  </section>
+
+  <section class="passenger-options">
+    <h3> Options </h3>
+    <ul>
+      <!-- Updated to make sure the new trip will be for current passenger -->
+      <li><%= link_to "New Trip", trips_path(:psngr_id => @passenger.id),
+        method: :post %></li>
+      <li><%= link_to "Edit", edit_passenger_path %></li>
+      <li><%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id),
+        method: :patch, data: { confirm: 'Are you sure?' } %></li>
+    </ul>
+  </section>
+
+<% else %> <!-- passenger is deactivated-->
+  <h2>Passenger <%= @passenger.id %> has been deactivated.</h2>
+<% end %>

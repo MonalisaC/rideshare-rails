@@ -1,7 +1,3 @@
-# TODO: less expensive way to do the trips thing than calling it every time??
-# TODO: should trips be handling the cost logic?
-# TODO: rounding with float issues. How to resolve? Make into Money?
-
 class Driver < ApplicationRecord
   has_many :trips
 
@@ -33,7 +29,6 @@ class Driver < ApplicationRecord
 
   def get_status
     return is_available ? "Available" : "Unavailable"
-    # return is_available && !has_in_progress_trip ? "Available" : "Unavailable"
   end
 
   def has_in_progress_trip?

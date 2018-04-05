@@ -55,7 +55,7 @@
       <li><%= link_to "New Trip", passenger_trips_path(@passenger.id), method: :post %></li>
       <li><%= link_to "Edit", edit_passenger_path %></li>
       <li><%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id),
-        method: :patch, data: { confirm: 'Are you sure?' } %></li>
+        method: :patch, :disabled => @passenger.has_in_progress_trip?, data: { confirm: 'Are you sure?' } %></li>
     </ul>
   </section>
 

@@ -3,7 +3,7 @@
   <%= render partial: "form", locals: { page_title: "Edit #{@passenger.name}" } %>
   <br>
   <%= button_to "Deactivate", mark_passenger_deactivated_path(@passenger.id),
-    method: :patch, data: { confirm: 'Are you sure?' } %>
+    method: :patch, :disabled => @passenger.has_in_progress_trip?, data: { confirm: 'Are you sure?' } %>
 <% else %>
   Passenger <%= @passenger.id %>  has been deactivated.
 <% end %>

@@ -12,17 +12,18 @@ class TripsController < ApplicationController
   end
 
   def create
-    @trip = Trip.new
-    @trip.passenger = Passenger.find_by(id: params[:passenger_id])
-    @trip.driver = find_available_driver #Driver.all.sample
-    if @trip.driver.nil?
+    driver = find_available_driver
+    passenger = Passenger.find_by(id: params[:passenger_id])
+    if !driver
       flash[:notice] = "Sorry! There are no available drivers right now."
-      redirect_to @trip.passenger
+      redirect_to passenger
     else
-      @trip.rating = nil
+      @trip = Trip.new
+      @trip.passenger = Passenger.find_by(id: params[:passenger_id])
+      @trip.driver = driver
+      # @trip.rating = nil
       @trip.date = Date.today
       @trip.cost = rand(1000..3000)
-
       if @trip.save
         @trip.driver.update(is_available: false)
         redirect_to @trip

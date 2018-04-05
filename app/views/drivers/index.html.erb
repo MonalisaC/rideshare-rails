@@ -2,6 +2,7 @@
 
 <ul>
   <% @drivers.each do |driver| %>
+    <% next if driver.is_deactivated %>
   	<li><%= link_to driver.name, driver_path(driver.id) %></li>
   <% end %>
 </ul>

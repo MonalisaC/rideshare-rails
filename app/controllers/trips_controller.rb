@@ -63,7 +63,7 @@ end
 private
 
 def find_available_driver
-  return Driver.where(is_available: true, is_deactivated: false).sample
+  return Driver.where(is_available: true).sample
 end
 
 def trip_params

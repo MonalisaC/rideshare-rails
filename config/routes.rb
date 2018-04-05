@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   root to: 'welcome#index'
-  resources :trips, :drivers, :passengers
-
+  resources :trips, :except => [:new, :create]
+  resources :drivers, :passengers
   resources :passengers do
     resources :trips, only: [:create]
   end

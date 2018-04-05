@@ -14,7 +14,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new
     @trip.driver = find_available_driver #Driver.all.sample
-    @trip.passenger = Passenger.find_by(id: params[:psngr_id])
+    @trip.passenger = Passenger.find_by(id: params[:passenger_id])
     @trip.rating = nil
     @trip.date = Date.today
     @trip.cost = rand(1000..3000)

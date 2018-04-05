@@ -52,7 +52,7 @@
       <ul>
 
         <li>
-          <%= link_to "New Trip", trips_path(:psngr_id => @passenger.id), method: :post %>
+          <%= link_to "New Trip", passenger_trips_path(@passenger.id), method: :post %>
           <!-- Updated to make sure the new trip will be for current passenger -->
         </li>
         <li>

@@ -50,7 +50,7 @@ class TripsController < ApplicationController
     if  @trip = Trip.find(params[:id])
       @trip.destroy
     end
-    flash[:notice] = "You have successfully deleted."
+    flash[:notice] = "You have successfully deleted the trip."
     redirect_to trips_path
   end
 

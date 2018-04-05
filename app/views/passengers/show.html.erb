@@ -1,5 +1,3 @@
-<!-- TODO: Address the <p></p> thing with css or <br /> ?? -->
-
 <h1>Passenger Info</h1>
 
 <% if !@passenger.is_deactivated%>
@@ -11,13 +9,11 @@
   </section>
 
   <section class="trips-for-passenger">
-    <p></p>
     <h3>Trips:</h3>
-    <%= render partial: "shared/table", locals: { page_title: "Trips ", table_trips: @passenger.trips} %>
+    <%= render partial: "shared/table", locals: {table_trips: @passenger.trips} %>
     </section>
 
-
-  <section class="passenger-options">
+  <section class="options">
     <h3> Options </h3>
     <ul>
       <li><%= link_to "New Trip", passenger_trips_path(@passenger.id), method: :post %></li>

@@ -2,9 +2,6 @@
 
 <% if !@passenger.is_deactivated%>
 
-  <section class="user-main">
-
-
     <section class="user-info">
       <h2 class="page-subheader"><%= @passenger.name %><h2>
       <ul>
@@ -27,7 +24,6 @@
       <h3>Trips</h3>
       <%= render partial: "shared/table", locals: {table_trips: @passenger.trips, is_allowed_to_rate: true } %>
     </section>
-  </section>
 
 <% else %> <!-- passenger is deactivated-->
   <section class="deactivated-message">Passenger #<%= @passenger.id %> has been deactivated.</section>

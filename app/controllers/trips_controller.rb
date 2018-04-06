@@ -25,23 +25,27 @@ class TripsController < ApplicationController
   end
 
   def create
-    driver = find_available_driver
     passenger = Passenger.find_by(id: params[:passenger_id])
-    if !driver
-      flash[:notice] = "Sorry! There are no available drivers right now."
+    if passenger.has_in_progress_trip?
+      flash[:notice] = "Please provide a rating for your last trip before starting a new one."
       redirect_to passenger
     else
-      @trip = Trip.new
-      @trip.passenger = Passenger.find_by(id: params[:passenger_id])
-      @trip.driver = driver
-      # @trip.rating = nil
-      @trip.date = Date.today
-      @trip.cost = rand(1000..3000)
-      if @trip.save
-        @trip.driver.update(is_available: false)
-        redirect_to @trip
+      driver = find_available_driver
+      if !driver
+        flash[:notice] = "Sorry! There are no available drivers right now."
+        redirect_to passenger
       else
-        render :new
+        @trip = Trip.new
+        @trip.passenger = Passenger.find_by(id: params[:passenger_id])
+        @trip.driver = driver
+        # @trip.rating = nil
+        @trip.date = Date.today
+        @trip.cost = rand(1000..3000)
+        if @trip.save
+          redirect_to @trip
+        else
+          render :new
+        end
       end
     end
   end

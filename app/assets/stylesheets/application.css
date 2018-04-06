@@ -33,6 +33,10 @@ header {
 }
 
 body {
+<<<<<<< HEAD
+=======
+  /* body, html { */
+>>>>>>> 22671e65808630d836d359d225b25caf567fa502
   height: 100%;
   background-color: #B2BDFC;
   background-image: url("https://assets.materialup.com/uploads/13cdf049-5fbd-4d8a-8417-0bfef6663a74/preview.png");

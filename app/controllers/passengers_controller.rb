@@ -51,7 +51,7 @@ class PassengersController < ApplicationController
     @passenger = Passenger.find(params[:id])
     @passenger.update(is_deactivated: true)
     @passenger.save
-    redirect_to root_path
+    redirect_to passenger_path(@passenger.id)
   end
 
   private

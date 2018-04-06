@@ -46,6 +46,11 @@ body {
   margin-bottom: 2em;
 }
 
+form_for {
+  margin-top: 3em;
+  margin-bottom: 2em;
+}
+
 header nav ul{
   display: flex;
   flex-flow: row;
@@ -74,6 +79,43 @@ footer {
   background-color: rgba(0, 0, 255, 0.3);
   color: #000;
 }
+
+.page-header {
+
+}
+
+.page-subheader {
+
+}
+
+.user-info {
+
+}
+
+.options {
+
+}
+
+.class {
+
+}
+
+.trips {
+
+}
+
+.deactivated-message{
+
+}
+
+.user-list{
+
+}
+
+.errors {
+
+}
+
 
 .welcome {
   border-radius: 0px 50px 0px 50px;

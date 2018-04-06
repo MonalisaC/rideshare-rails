@@ -46,11 +46,6 @@ body {
   margin-bottom: 2em;
 }
 
-form_for {
-  margin-top: 3em;
-  margin-bottom: 2em;
-}
-
 header nav ul{
   display: flex;
   flex-flow: row;
@@ -96,11 +91,11 @@ footer {
 
 }
 
-.class {
+.trips {
 
 }
 
-.trips {
+.trips-table {
 
 }
 
@@ -116,6 +111,9 @@ footer {
 
 }
 
+.form {
+
+}
 
 .welcome {
   border-radius: 0px 50px 0px 50px;

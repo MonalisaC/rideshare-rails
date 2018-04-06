@@ -13,6 +13,9 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore all DS_ files
+.DS_Store
+
 /node_modules
 /yarn-error.log
 

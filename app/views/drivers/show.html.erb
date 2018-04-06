@@ -1,6 +1,7 @@
-<h1 class="page-header">Driver Info</h1>
 
-<% if !@driver.is_deactivated %>
+	<h1 class="page-header">Driver Info</h1>
+
+	<% if !@driver.is_deactivated %>
 
 	<section class="user-info">
 		<h2 class="page-subheader"><%= @driver.name %></h2>
@@ -17,7 +18,7 @@
 	<section class="options">
 		<h3> Options </h3>
 		<ul>
-			<li><%= link_to "Edit", edit_driver_path %></li>
+			<li><%= button_to "Edit", edit_driver_path, method: :patch %></li>
 			<li><%= button_to "Deactivate", mark_driver_deactivated_path(@driver.id),
 				method: :patch, :disabled => @driver.has_in_progress_trip?, data: { confirm: 'Are you sure?' } %></li>
 		</ul>
@@ -28,6 +29,6 @@
     <%= render partial: "shared/table", locals: { table_trips: @driver.trips, is_allowed_to_rate: false } %>
   </section>
 
-<% else %> <!-- driver is deactivated-->
-		<section class="deactivated-message">Driver #<%= @driver.id %> is deactivated!<section>
-<% end %>
+	<% else %> <!-- driver is deactivated-->
+			<section class="deactivated-message">Driver #<%= @driver.id %> is deactivated!<section>
+	<% end %>

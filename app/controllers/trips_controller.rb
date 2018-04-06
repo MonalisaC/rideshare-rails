@@ -1,6 +1,13 @@
 class TripsController < ApplicationController
   def index
-    @trips = Trip.all.order(id: :asc)
+    # if params[:passenger_id]
+    #   # This is the nested route, /passenger/:passenger_id/trips
+    #   passenger = Passenger.find_by(id: params[:passenger_id])
+    #   @trips = passenger.trips
+    # else
+      # This is the 'regular' route, /trips
+      @trips = Trip.all.order(id: :asc)
+    # end
   end
 
   def show
@@ -8,7 +15,13 @@ class TripsController < ApplicationController
   end
 
   def new
-    @trip = Trip.new
+    # if params[:passenger_id]
+    #   # This is the nested route, /passenger/:passenger_id/trips/new
+    #   passenger = Passenger.find_by(id: params[:passenger_id])
+    #   @trip = passenger.trips.new
+    # else
+      @trip = Trip.new
+    # end
   end
 
   def create
@@ -70,5 +83,5 @@ end
 
 def trip_params
   params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id,
-  :is_available)
+    :is_available)
 end

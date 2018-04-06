@@ -20,7 +20,7 @@
           <%= trip.rating %>
         <% elsif is_allowed_to_rate %>
           <%= form_for trip do |f| %>
-            <%= f.select :rating, [1, 2, 3, 4, 5]%>
+            <%= f.select :rating, [1, 2, 3, 4, 5] %>
             <%= f.submit%>
           <% end %>
         <!-- ride is in progress and cannot be updated on trip and driver pages -->
@@ -30,4 +30,5 @@
       </td>
     </tr>
   <% end %>
+</section>
 </table>

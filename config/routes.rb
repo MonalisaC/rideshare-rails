@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :trips, :except => [:new, :create]
   resources :drivers, :passengers, :except => [:destroy]
   resources :passengers do
+    # resources :trips, only: [:new, :create]
+    # resources :trips, only: [:index, :create]
     resources :trips, only: [:create]
+
+
   end
 
   patch '/drivers/:id/is_deactivated', to: 'drivers#is_deactivated', as:

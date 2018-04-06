@@ -3,14 +3,14 @@
 <% if !@driver.is_deactivated %>
 
 	<section class="user-info">
-		<h2 class="page-subheader"><%= @driver.name %><h2>
+		<h2 class="page-subheader"><%= @driver.name %></h2>
 		<ul>
 			<li>VIN: <%= @driver.vin %></li>
 			<li>Car Make: <%= @driver.car_make %></li>
 			<li>Car Model: <%= @driver.car_model %></li>
 			<li>Average rating: <%= @driver.get_average_rating %></li>
-			<li>Total earnings: $<%= @driver.get_total_earnings %> </li>
-			<li>Status: <%= @driver.get_status %> </li>
+			<li>Total earnings: $<%= @driver.get_total_earnings %></li>
+			<li>Status: <%= @driver.get_status %></li>
 		</ul>
 	</section>
 

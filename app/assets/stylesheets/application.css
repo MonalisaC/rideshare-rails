@@ -13,6 +13,11 @@
 *= require_tree .
 *= require_self
 */
+* {
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue",
+    Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+
 header {
   padding-bottom: 1em;
   text-align: center;

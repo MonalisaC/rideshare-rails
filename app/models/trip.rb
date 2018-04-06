@@ -17,7 +17,7 @@ class Trip < ApplicationRecord
   end
 
   def is_complete?
-    return !self.rating.nil?
+    return !rating.nil?
   end
 
   def get_rides

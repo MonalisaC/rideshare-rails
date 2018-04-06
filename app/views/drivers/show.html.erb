@@ -25,7 +25,7 @@
 
 	<section class="trips">
 		<h3>Trips</h3>
-    <%= render partial: "shared/table", locals: { page_title: "Trips", table_trips: @driver.trips } %>
+    <%= render partial: "shared/table", locals: { table_trips: @driver.trips, is_allowed_to_rate: false } %>
   </section>
 
 <% else %> <!-- driver is deactivated-->

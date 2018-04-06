@@ -9,21 +9,25 @@
   </tr>
 
   <%table_trips.each do |trip| %>
-  <tr>
-    <td><%= link_to trip.id, trip_path(trip.id) %></td>
-    <td><%= trip.date %></td>
-    <td><%= link_to trip.driver.name, driver_path(trip.driver.id) %></td>
-    <td><%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%></td>
-    <td>$<%= trip.cost_usd %></td>
-    <td><% if trip.rating == nil%>
-      <%= form_for trip do |f| %>
-      <%= f.select :rating, [1, 2, 3, 4, 5]%>
-      <%= f.submit%>
-      <% end %>
-      <% else %>
-      <%= trip.rating %>
-      <% end %></td>
+    <tr>
+      <td><%= link_to trip.id, trip_path(trip.id) %></td>
+      <td><%= trip.date %></td>
+      <td><%= link_to trip.driver.name, driver_path(trip.driver.id) %></td>
+      <td><%= link_to trip.passenger.name, passenger_path(trip.passenger.id)%></td>
+      <td>$<%= trip.cost_in_dollars.to_string_rounded %></td>
+      <td>
+        <% if trip.is_complete?%>
+          <%= trip.rating %>
+        <% elsif is_allowed_to_rate %>
+          <%= form_for trip do |f| %>
+            <%= f.select :rating, [1, 2, 3, 4, 5]%>
+            <%= f.submit%>
+          <% end %>
+        <!-- ride is in progress and cannot be updated on trip and driver pages -->
+        <% else %>
+          TDB
+        <% end %>
+      </td>
     </tr>
-    <% end %>
-
-  </table>
+  <% end %>
+</table>

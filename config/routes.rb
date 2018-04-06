@@ -4,11 +4,7 @@ Rails.application.routes.draw do
   resources :trips, :except => [:new, :create]
   resources :drivers, :passengers, :except => [:destroy]
   resources :passengers do
-    # resources :trips, only: [:new, :create]
-    # resources :trips, only: [:index, :create]
     resources :trips, only: [:create]
-
-
   end
 
   patch '/drivers/:id/is_deactivated', to: 'drivers#is_deactivated', as:
@@ -16,7 +12,6 @@ Rails.application.routes.draw do
 
   patch '/passengers/:id/mark_deactivate', to: 'passengers#mark_deactivate', as:
   'mark_passenger_deactivated'
-
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

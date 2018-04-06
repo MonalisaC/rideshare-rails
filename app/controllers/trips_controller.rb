@@ -1,13 +1,6 @@
 class TripsController < ApplicationController
   def index
-    # if params[:passenger_id]
-    #   # This is the nested route, /passenger/:passenger_id/trips
-    #   passenger = Passenger.find_by(id: params[:passenger_id])
-    #   @trips = passenger.trips
-    # else
-      # This is the 'regular' route, /trips
-      @trips = Trip.all.order(id: :asc)
-    # end
+    @trips = Trip.all.order(id: :asc)
   end
 
   def show
@@ -15,44 +8,31 @@ class TripsController < ApplicationController
   end
 
   def new
-    # if params[:passenger_id]
-    #   # This is the nested route, /passenger/:passenger_id/trips/new
-    #   passenger = Passenger.find_by(id: params[:passenger_id])
-    #   @trip = passenger.trips.new
-    # else
-      @trip = Trip.new
-    # end
+    @trip = Trip.new
   end
 
   def create
+    driver = find_available_driver
     passenger = Passenger.find_by(id: params[:passenger_id])
-    if passenger.has_in_progress_trip?
-      flash[:notice] = "Please provide a rating for your last trip before starting a new one."
+    if !driver
+      flash[:notice] = "Sorry! There are no available drivers right now."
       redirect_to passenger
     else
-      driver = find_available_driver
-      if !driver
-        flash[:notice] = "Sorry! There are no available drivers right now."
-        redirect_to passenger
+      @trip = Trip.new
+      @trip.passenger = passenger
+      @trip.driver = driver
+      @trip.date = Date.today
+      @trip.cost = rand(1000..3000)
+      if @trip.save
+        redirect_to @trip
       else
-        @trip = Trip.new
-        @trip.passenger = Passenger.find_by(id: params[:passenger_id])
-        @trip.driver = driver
-        # @trip.rating = nil
-        @trip.date = Date.today
-        @trip.cost = rand(1000..3000)
-        if @trip.save
-          redirect_to @trip
-        else
-          render :new
-        end
+        render :new
       end
     end
   end
 
   def edit
     @trip = Trip.find_by(id: params[:id])
-
   end
 
   def update
@@ -76,16 +56,16 @@ class TripsController < ApplicationController
     redirect_to trips_path
   end
 
-end
 
 private
 
-def find_available_driver
-  #
-  return Driver.where(is_available: true).sample
-end
+  def find_available_driver
+    return Driver.where(is_available: true).sample
+  end
 
-def trip_params
-  params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id,
-    :is_available)
+  def trip_params
+    params.require(:trip).permit(:date, :rating, :cost, :driver_id, :passenger_id,
+      :is_available)
+  end
+
 end

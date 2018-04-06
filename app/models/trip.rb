@@ -26,16 +26,12 @@ class Trip < ApplicationRecord
     return find_rides
   end
 
-# This method ensures driver availability is based on trip status.
-  def set_driver_is_available
-    if is_complete?
-      self.driver.update(is_available: true)
-    else
-      self.driver.update(is_available: false)
-    end
-  end
-
   private
+
+  # This method ensures driver availability is based on trip status.
+  def set_driver_is_available
+    driver.update(is_available: false) if !is_complete?
+  end
 
   def find_rides
     return self.trips

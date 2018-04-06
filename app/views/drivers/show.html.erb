@@ -18,7 +18,7 @@
 	<section class="options">
 		<h3> Options </h3>
 		<ul>
-			<li><%= button_to "Edit", edit_driver_path, method: :put %></li>
+			<li><%= link_to "Edit", edit_driver_path %></li>
 			<li><%= button_to "Deactivate", mark_driver_deactivated_path(@driver.id),
 				method: :patch, :disabled => @driver.has_in_progress_trip?, data: { confirm: 'Are you sure?' } %></li>
 		</ul>

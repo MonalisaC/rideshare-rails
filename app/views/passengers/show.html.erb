@@ -3,7 +3,7 @@
 <% if !@passenger.is_deactivated%>
 
     <section class="user-info">
-      <h2 class="page-subheader"><%= @passenger.name %><h2>
+      <h2 class="page-subheader"><%= @passenger.name %></h2>
       <ul>
         <li>Phone number: <%= @passenger.phone_num %></li>
         <li>Total charges: $<%= @passenger.get_total_charged %></li>
